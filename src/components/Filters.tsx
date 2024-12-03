@@ -1,4 +1,3 @@
-// src/components/Filters.tsx
 import React from "react";
 
 interface FiltersProps {
@@ -10,7 +9,6 @@ interface FiltersProps {
   setGenderFilter: React.Dispatch<React.SetStateAction<string>>;
   resetFilters: () => void;
 }
-
 const Filters: React.FC<FiltersProps> = ({
   statusFilter,
   setStatusFilter,
@@ -21,9 +19,9 @@ const Filters: React.FC<FiltersProps> = ({
   resetFilters,
 }) => {
   return (
-    <div className="mb-6 text-center flex justify-center space-x-4">
+    <div className="flex flex-wrap sm:flex-nowrap justify-center gap-4 mb-6">
       <select
-        className="p-2 w-64 border border-gray-300 rounded-lg"
+        className="p-2 w-full sm:w-64 border border-gray-300 rounded-lg"
         value={statusFilter}
         onChange={(e) => setStatusFilter(e.target.value)}
       >
@@ -34,7 +32,7 @@ const Filters: React.FC<FiltersProps> = ({
       </select>
 
       <select
-        className="p-2 w-64 border border-gray-300 rounded-lg"
+        className="p-2 w-full sm:w-64 border border-gray-300 rounded-lg"
         value={speciesFilter}
         onChange={(e) => setSpeciesFilter(e.target.value)}
       >
@@ -45,7 +43,7 @@ const Filters: React.FC<FiltersProps> = ({
       </select>
 
       <select
-        className="p-2 w-64 border border-gray-300 rounded-lg"
+        className="p-2 w-full sm:w-64 border border-gray-300 rounded-lg"
         value={genderFilter}
         onChange={(e) => setGenderFilter(e.target.value)}
       >
@@ -55,10 +53,9 @@ const Filters: React.FC<FiltersProps> = ({
         <option value="Genderless">Genderless</option>
       </select>
 
-      {/* Reset Filters Button */}
       <button
         onClick={resetFilters}
-        className="p-2 bg-red-500 text-white rounded-lg ml-4"
+        className="p-2 bg-red-500 text-white rounded-lg w-full sm:w-auto"
       >
         Reset Filters
       </button>

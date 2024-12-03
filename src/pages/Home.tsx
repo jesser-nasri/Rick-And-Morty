@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { fetchCharacters } from "../apis/rickAndMorty"; // Import the API function
-import Card from "../components/Card"; // Import the Card component
-import Search from "../components/Search"; // Import the Search component
-import Filters from "../components/Filters"; // Import the Filters component
-import Pagination from "../components/Pagination"; // Import the Pagination component
-import DarkModeToggle from "../components/DarkModeToggle"; // Import the DarkModeToggle component
+import { fetchCharacters } from "../apis/rickAndMorty";
+import Card from "../components/Card";
+import Search from "../components/Search";
+import Filters from "../components/Filters";
+import Pagination from "../components/Pagination";
+import DarkModeToggle from "../components/DarkModeToggle";
+import { CircularProgress } from "@mui/material";
 
 const Home: React.FC = () => {
   const [characters, setCharacters] = useState<any[]>([]);
   const [allCharacters, setAllCharacters] = useState<any[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredCharacters, setFilteredCharacters] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [charactersPerPage] = useState<number>(20);
-
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [speciesFilter, setSpeciesFilter] = useState<string>("");
   const [genderFilter, setGenderFilter] = useState<string>("");
@@ -71,19 +71,32 @@ const Home: React.FC = () => {
     }
 
     if (statusFilter) {
-      filtered = filtered.filter((character) => character.status === statusFilter);
+      filtered = filtered.filter(
+        (character) => character.status === statusFilter
+      );
     }
 
     if (speciesFilter) {
-      filtered = filtered.filter((character) => character.species === speciesFilter);
+      filtered = filtered.filter(
+        (character) => character.species === speciesFilter
+      );
     }
 
     if (genderFilter) {
-      filtered = filtered.filter((character) => character.gender === genderFilter);
+      filtered = filtered.filter(
+        (character) => character.gender === genderFilter
+      );
     }
 
     setFilteredCharacters(filtered.slice(0, 10));
-  }, [searchQuery, statusFilter, speciesFilter, genderFilter, allCharacters]);
+  }, [
+    searchQuery,
+    statusFilter,
+    speciesFilter,
+    genderFilter,
+    characters,
+    allCharacters,
+  ]);
 
   const resetFilters = () => {
     setSearchQuery("");
@@ -92,18 +105,25 @@ const Home: React.FC = () => {
     setGenderFilter("");
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <CircularProgress size={100} />
+      </div>
+    );
+  }
 
-  const displayedCharacters = searchQuery || statusFilter || speciesFilter || genderFilter
-    ? filteredCharacters
-    : characters;
+  const displayedCharacters =
+    searchQuery || statusFilter || speciesFilter || genderFilter
+      ? filteredCharacters
+      : characters;
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <div className="text-center flex-1">
-          <h1 className="text-5xl font-bold text-center">Rick and Morty Characters...</h1>
-        </div>
+    <div className="px-4 sm:px-6 md:px-10 py-6">
+      <div className="flex flex-wrap sm:flex-nowrap justify-between items-center mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold flex-1 text-center">
+          Rick and Morty Characters...
+        </h1>
         <DarkModeToggle />
       </div>
 
@@ -119,7 +139,7 @@ const Home: React.FC = () => {
         resetFilters={resetFilters}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center mx-auto">
         {displayedCharacters.map((character: any) => (
           <Card
             key={character.id}
@@ -133,11 +153,13 @@ const Home: React.FC = () => {
       </div>
 
       {!searchQuery && !statusFilter && !speciesFilter && !genderFilter && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-        />
+        <div className="flex justify-center mt-6">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       )}
     </div>
   );

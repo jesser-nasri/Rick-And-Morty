@@ -1,4 +1,3 @@
-// src/components/Search.tsx
 import React from 'react';
 
 interface SearchProps {
@@ -14,7 +13,7 @@ const Search: React.FC<SearchProps> = ({ searchQuery, setSearchQuery }) => {
         className="p-2 w-64 border border-gray-300 rounded-lg"
         placeholder="Search characters..."
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)} // Update search query on input change
+        onChange={(e) => setSearchQuery(e.target.value)} 
       />
     </div>
   );

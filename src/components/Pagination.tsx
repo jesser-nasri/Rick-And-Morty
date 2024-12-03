@@ -1,4 +1,3 @@
-// src/components/Pagination.tsx
 import React, { useState } from "react";
 
 interface PaginationProps {
@@ -31,7 +30,7 @@ const Pagination: React.FC<PaginationProps> = ({
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     } else {
-      setPageInput(currentPage.toString()); // Reset to currentPage if invalid input
+      setPageInput(currentPage.toString()); 
     }
   };
 
@@ -40,38 +39,39 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
       <button
         onClick={prevPage}
-        className="px-4 py-2 bg-gray-700 text-white rounded-l-lg disabled:opacity-50"
+        className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50"
         disabled={currentPage === 1}
       >
         Previous
       </button>
-      <span className="px-4 py-2 flex items-center">
+
+      <span className="px-4 py-2 text-center">
         {`Page ${currentPage} of ${totalPages}`}
       </span>
+
       <button
         onClick={nextPage}
-        className="px-4 py-2 bg-gray-700 text-white rounded-r-lg disabled:opacity-50"
+        className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50"
         disabled={currentPage === totalPages}
       >
         Next
       </button>
 
-      {/* Go to page input */}
-      <div className="ml-4 flex items-center">
+      <div className="flex flex-col sm:flex-row items-center gap-2">
         <input
           type="number"
           min={1}
           max={totalPages}
           value={pageInput}
           onChange={handleInputChange}
-          className="p-2 border border-gray-300 rounded-lg w-24"
+          className="p-2 border border-gray-300 rounded-lg w-16 sm:w-24 text-center"
         />
         <button
           onClick={goToPage}
-          className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
         >
           Go
         </button>

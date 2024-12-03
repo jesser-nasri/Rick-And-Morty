@@ -1,4 +1,3 @@
-// src/components/Card.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -12,17 +11,16 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ id, image, name, status, location }) => {
 
-  // Determine the background color based on the status
   const getStatusColor = () => {
     switch (status) {
       case 'Alive':
-        return 'bg-green-300'; // Green color for Alive
+        return 'bg-green-300'; 
       case 'Dead':
-        return 'bg-red-300'; // Red color for Dead
+        return 'bg-red-300'; 
       case 'unknown':
-        return 'bg-gray-300'; // Gray color for Unknown
+        return 'bg-gray-300'; 
       default:
-        return 'bg-white'; // Default to white if no status matches
+        return 'bg-white'; 
     }
   };
 

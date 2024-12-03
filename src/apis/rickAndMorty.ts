@@ -1,4 +1,3 @@
-// src/apis/rickAndMorty.ts
 
 const API_BASE_URL = 'https://rickandmortyapi.com/api';
 
@@ -8,14 +7,12 @@ export const endpoints = {
   episodes: `${API_BASE_URL}/episode`,
 };
 
-// Fetch characters from the API
 export const fetchCharacters = async (page: number = 1) => {
   const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
   const data = await response.json();
-  return data; // Return the data, including 'results' and 'info'
+  return data; 
 };
 
-// Fetch character details from the API
 export const fetchCharacterDetails = async (id: number) => {
   try {
     const response = await fetch(`${endpoints.characters}/${id}`);
@@ -23,14 +20,13 @@ export const fetchCharacterDetails = async (id: number) => {
       throw new Error('Failed to fetch character details');
     }
     const data = await response.json();
-    return data; // Return the detailed data for the character
+    return data; 
   } catch (error) {
     console.error('Error fetching character details:', error);
-    throw error; // Re-throw error for handling in the component
+    throw error; 
   }
 };
 
-// Fetch locations from the API
 export const fetchLocations = async () => {
   try {
     const response = await fetch(endpoints.locations);
@@ -38,14 +34,13 @@ export const fetchLocations = async () => {
       throw new Error('Failed to fetch locations');
     }
     const data = await response.json();
-    return data.results; // Return the list of locations
+    return data.results; 
   } catch (error) {
     console.error('Error fetching locations:', error);
     throw error;
   }
 };
 
-// Fetch episodes from the API
 export const fetchEpisodes = async () => {
   try {
     const response = await fetch(endpoints.episodes);
@@ -53,7 +48,7 @@ export const fetchEpisodes = async () => {
       throw new Error('Failed to fetch episodes');
     }
     const data = await response.json();
-    return data.results; // Return the list of episodes
+    return data.results; 
   } catch (error) {
     console.error('Error fetching episodes:', error);
     throw error;

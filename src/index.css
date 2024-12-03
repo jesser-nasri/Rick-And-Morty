@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* src/index.css */
 body {
   @apply bg-white text-gray-900;
 }
